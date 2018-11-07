@@ -298,7 +298,9 @@ Display the result in a temporary buffer."
     ;; collapse all repos
     (outline-hide-sublevels 1)
     (read-only-mode 1)
-    (beginning-of-buffer)))
+    ;; move back on the first repo
+    (beginning-of-buffer)
+    (next-line 5)))
 
 (provide 'fgit-list)
 
