@@ -293,6 +293,8 @@ Display the result in a temporary buffer."
     (outline-hide-sublevels 1)
     (read-only-mode 1)))
 
+(require 'fgit-list)
+
 
 ;; ------------------------------------------------------------------------ ;;
 ;;  DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS COMMENT.               ;;
