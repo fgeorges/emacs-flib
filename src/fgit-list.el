@@ -30,6 +30,10 @@
 ;;           '(((:path . "/home/me/projects/elisp/foobar/")  (:fetch . t))
 ;;             ((:path . "/home/me/projects/elisp/somelib/"))
 ;;             ((:path . "/home/me/projects/git/fourtytwo/") (:fetch . t))))
+;;
+;;; TODO:
+;;
+;; - Should stashes be considered as "dirty"?
 
 ;;; Code:
 
@@ -238,6 +242,8 @@ Display the result in a temporary buffer."
         (setq repo (list (cons :path repo))))
       (let ((path  (cdr (assq :path  repo)))
             (fetch (cdr (assq :fetch repo))))
+	(unless path
+	  (error "No path in the fgit:repositories entry: %O" repo))
         (when (and dofetch (or fetch fgit:fetch-by-default))
           (fgit:git-to-string path "fetch"))
         (let* ((status   (fgit:repo-status path))
