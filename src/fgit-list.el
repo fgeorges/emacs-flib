@@ -297,7 +297,8 @@ Display the result in a temporary buffer."
       (redisplay))
     ;; collapse all repos
     (outline-hide-sublevels 1)
-    (read-only-mode 1)))
+    (read-only-mode 1)
+    (beginning-of-buffer)))
 
 (provide 'fgit-list)
 
