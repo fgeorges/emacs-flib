@@ -102,9 +102,14 @@ When set to `t', it is aquivalent to set `(:fetch . t)' on all repos in
 (defun fgit:start-magit-at (point)
   (interactive "d")
   (let ((repo (get-char-property point :fgit:repo)))
-    (when (not repo)
+    (unless repo
       (error "No repo at: %d" point))
-    (magit-status repo)))
+    (unless (fboundp 'magit-status-internal)
+      ;; do not require Magit necessarily, only if this function is used
+      ;; (so this module is usable without Magit, and loads it only if needed)
+      (unless (require 'magit nil t)
+        (error "Magit not found")))
+    (magit-status-internal repo)))
 
 (defun fgit:overlay-at (point)
   (let ((overlays (overlays-at point))
